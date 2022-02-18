@@ -1,12 +1,43 @@
 import React from 'react'
+import { useParams } from "react-router-dom";
 import {Layout, Menu, Breadcrumb} from 'antd';
-import {BulbOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
+import {BulbOutlined} from '@ant-design/icons';
 import {Header} from "../components/Header";
-import {list} from '../content/list'
+import {getCourse, getBlock, getLesson} from '../content/list'
+
+type CourseUrlParam = {
+    name: string;
+    block: number;
+    lesson: number;
+}
 
 export const Course: React.FC = () => {
     const {SubMenu} = Menu;
     const {Content, Sider} = Layout;
+    const urlParams = useParams();
+    const params: CourseUrlParam = {
+        name: urlParams.name || '',
+        block: urlParams.block ? parseInt(urlParams.block, 10) : 0,
+        lesson: urlParams.lesson ? parseInt(urlParams.lesson, 10) : 0,
+    };
+    
+    if (!params.name) {
+        return <div>Not found</div>
+    }
+
+    const course = getCourse(params.name);
+
+    if (!course) {
+        return <div>Not found</div>
+    }
+
+    const block = getBlock(course, params.block);
+
+    if (!block) {
+        return <div>Not found</div>
+    }
+
+    const lesson = getLesson(block, params.lesson);
 
     return (
         <Layout>
@@ -15,35 +46,24 @@ export const Course: React.FC = () => {
                 <Sider width={200} className="site-layout-background">
                     <Menu
                         mode="inline"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                        defaultSelectedKeys={[String(params.lesson)]}
+                        defaultOpenKeys={[String(params.block)]}
                         style={{height: '100%', borderRight: 0}}
                     >
-                        <SubMenu key="sub1" icon={<BulbOutlined />} title="Общие понятия">
-                            <Menu.Item key="1">Что такое React</Menu.Item>
-                            <Menu.Item key="2">option2</Menu.Item>
-                            <Menu.Item key="3">option3</Menu.Item>
-                            <Menu.Item key="4">option4</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                            <Menu.Item key="5">option5</Menu.Item>
-                            <Menu.Item key="6">option6</Menu.Item>
-                            <Menu.Item key="7">option7</Menu.Item>
-                            <Menu.Item key="8">option8</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                            <Menu.Item key="9">option9</Menu.Item>
-                            <Menu.Item key="10">option10</Menu.Item>
-                            <Menu.Item key="11">option11</Menu.Item>
-                            <Menu.Item key="12">option12</Menu.Item>
-                        </SubMenu>
+                        {course.blocks.map((block) => (
+                            <SubMenu key={block.id} icon={<BulbOutlined />} title={block.name}>
+                                {block.lessons.map((lesson) => (
+                                    <Menu.Item key={lesson.id}>{lesson.name}</Menu.Item>
+                                ))}
+                            </SubMenu>    
+                        ))}
                     </Menu>
                 </Sider>
                 <Layout style={{padding: '0 24px 24px'}}>
                     <Breadcrumb style={{margin: '16px 0'}}>
-                        <Breadcrumb.Item>Курс ReactJS</Breadcrumb.Item>
-                        <Breadcrumb.Item>Общие понятия</Breadcrumb.Item>
-                        <Breadcrumb.Item>Что такое React</Breadcrumb.Item>
+                        <Breadcrumb.Item>{course.name}</Breadcrumb.Item>
+                        <Breadcrumb.Item>{block.name}</Breadcrumb.Item>
+                        <Breadcrumb.Item>{lesson?.name}</Breadcrumb.Item>
                     </Breadcrumb>
                     <Content
                         className="site-layout-background"
@@ -53,7 +73,7 @@ export const Course: React.FC = () => {
                             minHeight: 280,
                         }}
                     >
-                        {list[0].blocks[0].lessons[0].component}
+                        {lesson?.component}
                     </Content>
                 </Layout>
             </Layout>
