@@ -1,11 +1,13 @@
 import React from 'react'
-import {Layout, Menu, Breadcrumb, PageHeader} from 'antd';
-import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
+import {Layout, Menu, Breadcrumb} from 'antd';
+import {BulbOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
 import {Header} from "../components/Header";
+import {list} from '../content/list'
 
 export const Course: React.FC = () => {
     const {SubMenu} = Menu;
     const {Content, Sider} = Layout;
+
     return (
         <Layout>
             <Header/>
@@ -17,8 +19,8 @@ export const Course: React.FC = () => {
                         defaultOpenKeys={['sub1']}
                         style={{height: '100%', borderRight: 0}}
                     >
-                        <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                            <Menu.Item key="1">option1</Menu.Item>
+                        <SubMenu key="sub1" icon={<BulbOutlined />} title="Общие понятия">
+                            <Menu.Item key="1">Что такое React</Menu.Item>
                             <Menu.Item key="2">option2</Menu.Item>
                             <Menu.Item key="3">option3</Menu.Item>
                             <Menu.Item key="4">option4</Menu.Item>
@@ -39,9 +41,9 @@ export const Course: React.FC = () => {
                 </Sider>
                 <Layout style={{padding: '0 24px 24px'}}>
                     <Breadcrumb style={{margin: '16px 0'}}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                        <Breadcrumb.Item>Курс ReactJS</Breadcrumb.Item>
+                        <Breadcrumb.Item>Общие понятия</Breadcrumb.Item>
+                        <Breadcrumb.Item>Что такое React</Breadcrumb.Item>
                     </Breadcrumb>
                     <Content
                         className="site-layout-background"
@@ -51,12 +53,7 @@ export const Course: React.FC = () => {
                             minHeight: 280,
                         }}
                     >
-                        <PageHeader
-                            className="site-page-header"
-                            onBack={() => null}
-                            title="Title"
-                            subTitle="This is a subtitle"
-                        />
+                        {list[0].blocks[0].lessons[0].component}
                     </Content>
                 </Layout>
             </Layout>

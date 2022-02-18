@@ -1,0 +1,11 @@
+.course-title {
+    padding: 50px;
+    background-color: blueviolet;
+    margin-top: 50px;
+    border-radius: 16px;
+}
+
+.course-title__link {
+    color: whitesmoke;
+    font-size: 4rem;
+}
