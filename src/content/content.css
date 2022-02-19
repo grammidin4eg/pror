@@ -5,3 +5,7 @@
 .content p {
     text-indent: 12px;
 }
+
+video {
+    width: 600px;
+}

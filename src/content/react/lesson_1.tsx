@@ -5,10 +5,9 @@ import '../content.css'
 export const ReactLesson1: React.FC = () => (
     <div>
         <Divider orientation="left">Общие сведение о ReactJS</Divider>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/h9TwePYkJqE" title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen/>
+        <video controls>
+            <source src='https://firebasestorage.googleapis.com/v0/b/pror-77fc8.appspot.com/o/%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20ReactJS.mp4?alt=media&token=617bad53-811f-40eb-bc6c-53229db51292'></source>
+        </video>
         <Divider />
         <div className="content">
             <p>
