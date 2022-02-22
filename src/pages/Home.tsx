@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
             <Content>
                 <Row justify={"center"}>
                     <Col className={"course-title"}>
-                        <Link className={"course-title__link"} to={'/course/react/0/0'}>Курс React JS</Link>
+                        <Link className={"course-title__link"} to={'/course/react'}>Курс React JS</Link>
                     </Col>
                 </Row>
             </Content>

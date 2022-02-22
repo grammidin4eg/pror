@@ -13,6 +13,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/course/:name/:block/:lesson' element={<Course />} />
+                <Route path='/course/:name/*' element={<Course />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='*' element={<NoPage />} />
