@@ -1,5 +1,6 @@
 import React from 'react';
 import {ReactLesson1} from "./react/lesson_1";
+import {ReactLesson2} from './react/lesson_2';
 
 export type Lesson = {
     id: number;
@@ -35,8 +36,8 @@ export const list: Course[] = [
                     },
                     {
                         id: 1,
-                        name: 'Урок 2',
-                        component: <ReactLesson1 />
+                        name: 'Создаем React приложение',
+                        component: <ReactLesson2 />
                     }
                 ]
             }

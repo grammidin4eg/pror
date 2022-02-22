@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import {Layout, Menu, Breadcrumb} from 'antd';
 import {BulbOutlined} from '@ant-design/icons';
 import {Header} from "../components/Header";
@@ -53,7 +53,11 @@ export const Course: React.FC = () => {
                         {course.blocks.map((block) => (
                             <SubMenu key={block.id} icon={<BulbOutlined />} title={block.name}>
                                 {block.lessons.map((lesson) => (
-                                    <Menu.Item key={lesson.id}>{lesson.name}</Menu.Item>
+                                    <Menu.Item key={lesson.id}>
+                                        <NavLink to={`/course/${course.id}/${block.id}/${lesson.id}`}>
+                                            {lesson.name}
+                                        </NavLink>
+                                    </Menu.Item>
                                 ))}
                             </SubMenu>    
                         ))}
